@@ -1,6 +1,7 @@
 package is.ru.stringcalculator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
 
 public class Calculator {
 
@@ -25,7 +26,8 @@ public class Calculator {
 	private static String[] splitNumbers(String numbers){
 	    if(numbers.startsWith("//")){
 	    	return splitByDelimiter(numbers);
-	    } else {
+	    }
+	    else {
 	    	return numbers.split(",|\n");
 		}
 	}
@@ -40,9 +42,47 @@ public class Calculator {
     
     private static int sum(String[] numbers){
  	    int total = 0;
-        for(String number : numbers){
-		    total += toInt(number);
-		}
+ 	    int total2 = 0;
+ 	    try{
+	        for(String number : numbers){
+	        	total2 = toInt(number);
+	        	if(total2 < 0){
+	        		throw new IllegalArgumentException();
+				}
+				if(total2 > 1000)
+				{
+					continue;
+				}
+			    total += toInt(number);
+			}
+ 	    }
+ 	    catch(Exception e){
+ 	    	negativeNumbers(numbers);
+ 	    }
 		return total;
+    }
+
+    private static String toString(ArrayList<Integer> number){
+    	return String.valueOf(number);
+    }
+    
+    private static void negativeNumbers(String[] numbers){
+    	String negativeNum = "";
+    	int total = 0;
+    	for(String number : numbers){
+    		total = toInt(number);
+    		if(total < 0){
+        		ArrayList<Integer> negative = new ArrayList<Integer>();
+				negative.add(total);
+				negativeNum += toString(negative);
+			}
+    	}
+    	System.out.println("Negatives not allowed: " + negativeNum);
+ 		   	
+    }
+
+    
+    public static void main(String[] args){
+    	System.out.println(Calculator.add("-1,2,-3,-4"));
     }
 }
