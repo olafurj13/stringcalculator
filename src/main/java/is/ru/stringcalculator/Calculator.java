@@ -43,24 +43,29 @@ public class Calculator {
     private static int sum(String[] numbers){
  	    int total = 0;
  	    int total2 = 0;
- 	    try{
-	        for(String number : numbers){
-	        	total2 = toInt(number);
-	        	if(total2 < 0){
-	        		throw new IllegalArgumentException();
-				}
-				if(total2 > 1000)
-				{
-					continue;
-				}
-			    total += toInt(number);
+ 	    ArrayList<String> myArray = new ArrayList<String>();
+	    for(String number : numbers)
+	    {
+	        total2 = toInt(number);
+	        if(total2 < 0){
+	        	myArray.add(number);
 			}
- 	    }
- 	    catch(Exception e){
- 	    	negativeNumbers(numbers);
- 	    }
-		return total;
-    }
+			if(total2 > 1000){
+				continue;
+			}
+			total += toInt(number);
+		}
+		if(myArray.isEmpty())
+			return total;
+		else{
+			String negatives = "";
+			for(String neg : myArray){
+				negatives += neg + ",";
+			}
+			throw new RuntimeException("Negatives not allowed: " +negatives);
+		}
+
+ 	}
 
     private static String toString(ArrayList<Integer> number){
     	return String.valueOf(number);
@@ -79,10 +84,5 @@ public class Calculator {
     	}
     	System.out.println("Negatives not allowed: " + negativeNum);
  		   	
-    }
-
-    
-    public static void main(String[] args){
-    	System.out.println(Calculator.add("-1,2,-3,-4"));
     }
 }
