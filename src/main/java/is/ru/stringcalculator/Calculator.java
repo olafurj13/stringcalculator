@@ -24,18 +24,18 @@ public class Calculator {
 
 	private static String[] splitNumbers(String numbers){
 	    if(numbers.startsWith("//")){
-	    	Matcher m = Pattern.compile("//(.)\n(.*)").matcher(numbers);
-	    	m.matches();
-	    	String delimiter = m.group(1);
-	    	String num = m.group(2);
-	    	return num.split(delimiter);
+	    	return splitByDelimiter(numbers);
 	    } else {
 	    	return numbers.split(",|\n");
 		}
 	}
 
 	private static String[] splitByDelimiter(String numbers){
-
+	    Matcher m = Pattern.compile("//(.)\n(.*)").matcher(numbers);
+	    m.matches();
+	    String delimiter = m.group(1);
+	    String num = m.group(2);
+	    return num.split(delimiter);
 	}
     
     private static int sum(String[] numbers){
