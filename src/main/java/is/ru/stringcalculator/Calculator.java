@@ -66,23 +66,4 @@ public class Calculator {
 		}
 
  	}
-
-    private static String toString(ArrayList<Integer> number){
-    	return String.valueOf(number);
-    }
-    
-    private static void negativeNumbers(String[] numbers){
-    	String negativeNum = "";
-    	int total = 0;
-    	for(String number : numbers){
-    		total = toInt(number);
-    		if(total < 0){
-        		ArrayList<Integer> negative = new ArrayList<Integer>();
-				negative.add(total);
-				negativeNum += toString(negative);
-			}
-    	}
-    	System.out.println("Negatives not allowed: " + negativeNum);
- 		   	
-    }
 }
