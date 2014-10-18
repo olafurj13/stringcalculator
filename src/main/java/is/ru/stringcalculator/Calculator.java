@@ -25,11 +25,29 @@ public class Calculator {
 
 	private static String[] splitNumbers(String numbers){
 	    if(numbers.startsWith("//")){
+	    	if(numbers.contains(";;"))
+	    		return splitByAnLength(numbers);
 	    	return splitByDelimiter(numbers);
 	    }
 	    else {
 	    	return numbers.split(",|\n");
 		}
+	}
+
+	private static String[] splitByAnLength(String numbers) {
+		while(numbers.contains(";;"))
+		{
+			numbers = numbers.replaceAll(";;", ";");
+		}
+		while(numbers.contains("//;"))
+		{
+			numbers = numbers.replaceAll("//;", "");
+		}
+		while(numbers.contains("\n"))
+		{
+			numbers = numbers.replaceAll("\n", "");
+		}
+		return numbers.split(";");
 	}
 
 	private static String[] splitByDelimiter(String numbers){
