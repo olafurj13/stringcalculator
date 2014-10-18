@@ -45,6 +45,11 @@ public class CalculatorTest {
     }
     
     @Test
+    public void testDifferentDelimiter2(){
+        assertEquals(3, Calculator.add("//a\n1a2"));
+    }
+
+    @Test
     public void negativeNumberThrowsAnException(){
         try{
             Calculator.add("-3,1,4,-2");
@@ -61,5 +66,11 @@ public class CalculatorTest {
     @Test
     public void testDelimiterOfAnyLength(){
         assertEquals(6, Calculator.add("//;;;\n1;;;2;;;3"));
+    }
+
+
+    //@Test
+    public void testMultipleDelimiters(){
+        assertEquals(6, Calculator.add("//[*][%]\n1*2%3"));
     }
 }

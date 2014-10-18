@@ -35,19 +35,11 @@ public class Calculator {
 	}
 
 	private static String[] splitByAnLength(String numbers) {
-		while(numbers.contains(";;"))
-		{
-			numbers = numbers.replaceAll(";;", ";");
-		}
-		while(numbers.contains("//;"))
-		{
-			numbers = numbers.replaceAll("//;", "");
-		}
-		while(numbers.contains("\n"))
-		{
-			numbers = numbers.replaceAll("\n", "");
-		}
-		return numbers.split(";");
+		Matcher m = Pattern.compile("//(?<delimiter>.*)\n(?<value>.*)").matcher(numbers);
+	    m.matches();
+	    String delimiter = m.group(1);
+	    String num = m.group(2);
+	    return num.split(delimiter);
 	}
 
 	private static String[] splitByDelimiter(String numbers){
